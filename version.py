@@ -1,4 +1,4 @@
 #version de l'aplication globale
-APP_VERSION = 1.1
+APP_VERSION = 1.2
 
 #version de chaque composant de l'appli

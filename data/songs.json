@@ -1,0 +1,38 @@
+{
+    "songs": [],
+    "songs/linkinpark": [
+        "linkin_park/In-the-end-Linkin-Park.mp3",
+        "linkin_park/Numb-Linkin-Park.mp3",
+        "linkin_park/What-ive-done-Linkin-Park.mp3"
+    ],
+    "songs/bob_marley": [
+        
+        "20071214_Bob Marley I Know.mp3",
+        "20070711_Bob Marley - Nice time.mp3",
+        "20080423_Bob Marley - Buffalo soldier.mp3",
+        "20100420_Bob Marley - One Love.mp3",
+        "20080906_Bob Marley Easy Skanking.mp3",
+        "20071124_Bob Marley - Natty Dread (Audio).mp3",
+        "20080515_Bob Marley & The Wailers - Get Up, Stand Up (Live At The Rainbow Theatre, London  1977).mp3",
+        "20090711_Bob Marley- Three Little Birds (With Lyrics!).mp3"
+    ],
+    "songs/one_republic": [
+        "one_republic/20071104_One Republic - Prodigal.mp3",
+        "one_republic/20071130_One Republic - Hearing Voices.mp3",
+        "one_republic/20080210_One Republic - Someone To Save You.mp3",
+        "one_republic/20091120_OneRepublic - All This Time (Lyrics) (Waking Up Album).mp3",
+        "one_republic/20091123_OneRepublic - Stop And Stare (Official Music Video).mp3",
+        "one_republic/20091130_OneRepublic - All Fall Down (Live).mp3",
+        "one_republic/20091214_OneRepublic - Mercy (Closed Captioned).mp3",
+        "one_republic/20091214_OneRepublic - Say (All I Need) (Main Version, Closed Captioned).mp3",
+        "one_republic/20091215_One Republic - Come Home.mp3",
+        "one_republic/20100210_OneRepublic - All We Are [video].mp3",
+        "one_republic/20100412_OneRepublic - All The Right Moves (Acoustic).mp3",
+        "one_republic/20100513_OneRepublic - Secrets (Official Music Video).mp3",
+        "one_republic/20100513_OneRepublic - Secrets (Official Music Video).mp3",
+        "one_republic/20100608_OneRepublic - Marchin On (Official Music Video).mp3",
+        "one_republic/20100913_OneRepublic - Apologize (GO Show Extra).mp3",
+        "one_republic/OneRepublic - Good Life (Official Music Video).mp3"
+    ]
+
+}

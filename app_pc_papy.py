@@ -12,6 +12,10 @@ import os
 
 
 ####pour l'updater
+import updater
+
+
+os.system('python3 ./updater.py')
 
 VERSION_LOGICIEL = "1.0"
 

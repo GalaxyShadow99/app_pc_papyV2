@@ -28,20 +28,21 @@ def music_player(json_playlist_location : str):
 	def update_volume(sender, app_data):
 		pygame.mixer.music.set_volume(app_data / 100.0)
 
+	#illegal hardware error
 	def load_database():
-		songs = json.load(open("app_pc_papyV2/data/songs.json", "r+"))[f"{json_playlist_location}"]
+		songs = json.load(open("data/songs.json", "r+"))[f"{json_playlist_location}"]
 		for filename in songs:
 			dpg.add_button(label=f"{ntpath.basename(filename)}", callback=play, width=-1,
 						height=25, user_data=filename.replace("\\", "/"), parent="list")
 			
 			dpg.add_spacer(height=2, parent="list")
 
-
+	#illegal hardware error
 	def update_database(filename: str):
-		data = json.load(open("app_pc_papyV2/data/songs.json", "r+"))
+		data = json.load(open("data/songs.json", "r+"))
 		if filename not in data[f"{json_playlist_location}"]:
 			data[f"{json_playlist_location}"] += [filename]
-		json.dump(data, open("app_pc_papyV2/data/songs.json", "r+"), indent=4)
+		json.dump(data, open("data/songs.json", "r+"), indent=4)
 
 	def update_slider():
 		global state
@@ -55,6 +56,8 @@ def music_player(json_playlist_location : str):
 		dpg.configure_item(item="pos",max_value=100)
 		dpg.configure_item(item="pos",default_value=0)
 
+
+	#quand lancé pour la première fois joue la 2eme musique au lieu de celle selectionnée 
 	def play(sender, app_data, user_data):
 		global state,no
 		if user_data:
@@ -69,6 +72,7 @@ def music_player(json_playlist_location : str):
 				state="playing"
 				dpg.configure_item("cstate",default_value=f"State: Playing")
 				dpg.configure_item("csong",default_value=f"Now Playing : {ntpath.basename(user_data)}")
+		
 
 	def play_pause():
 		global state,no
@@ -83,24 +87,25 @@ def music_player(json_playlist_location : str):
 			dpg.configure_item("play",label="Pause")
 			dpg.configure_item("cstate",default_value=f"State: Playing")
 		else:
-			song = json.load(open("app_pc_papyV2/data/songs.json", "r"))[f"{json_playlist_location}"]
-			if song:
-				song=random.choice(song)
-				no = song
-				pygame.mixer.music.load(song)
-				pygame.mixer.music.play()
-				thread=threading.Thread(target=update_slider,daemon=False).start()	
-				dpg.configure_item("play",label="Pause")
-				if pygame.mixer.music.get_busy():
-					audio = MP3(song)
-					dpg.configure_item(item="pos",max_value=audio.info.length)
-					state="playing"
-					dpg.configure_item("csong",default_value=f"Now Playing : {ntpath.basename(song)}")
-					dpg.configure_item("cstate",default_value=f"State: Playing")
+			pass
+			# song = json.load(open("data/songs.json", "r"))[f"{json_playlist_location}"]
+			# if song:
+			# 	song=random.choice(song)
+			# 	no = song
+			# 	pygame.mixer.music.load(song)
+			# 	pygame.mixer.music.play()
+			# 	thread=threading.Thread(target=update_slider,daemon=False).start()	
+			# 	dpg.configure_item("play",label="Pause")
+			# 	if pygame.mixer.music.get_busy():
+			# 		audio = MP3(song)
+			# 		dpg.configure_item(item="pos",max_value=audio.info.length)
+			# 		state="playing"
+			# 		dpg.configure_item("csong",default_value=f"Now Playing : {ntpath.basename(song)}")
+			# 		dpg.configure_item("cstate",default_value=f"State: Playing")
 
 	def pre():
 		global state,no
-		songs = json.load(open('app_pc_papyV2/data/songs.json','r'))[f"{json_playlist_location}"]
+		songs = json.load(open('data/songs.json','r'))[f"{json_playlist_location}"]
 		try:
 			n = songs.index(no)
 			if n == 0:
@@ -112,7 +117,7 @@ def music_player(json_playlist_location : str):
 	def next():
 		global state,no
 		try:
-			songs = json.load(open('app_pc_papyV2/data/songs.json','r'))[f"{json_playlist_location}"]
+			songs = json.load(open('data/songs.json','r'))[f"{json_playlist_location}"]
 			n = songs.index(no)
 			if n == len(songs)-1:
 				n = -1
@@ -127,7 +132,7 @@ def music_player(json_playlist_location : str):
 
 	def add_files():
 		messagebox.showerror('Erreur',"Fonctionnalitée en cours de développement ! Merci de réessayer plus tard")
-		# data=json.load(open("app_pc_papyV2/data/songs.json","r"))
+		# data=json.load(open("data/songs.json","r"))
 		# filename=filedialog.askopenfilename(filetypes=[("Music Files", ("*.mp3","*.wav","*.ogg"))])
   
 		# if filename.endswith(".mp3" or ".wav" or ".ogg"):
@@ -138,7 +143,7 @@ def music_player(json_playlist_location : str):
 
 	def add_folder():
 		messagebox.showerror('Erreur',"Fonctionnalitée en cours de développement ! Merci de réessayer plus tard")
-		# data=json.load(open("app_pc_papyV2/data/songs.json","r"))
+		# data=json.load(open("data/songs.json","r"))
 		# root=Tk()
 		# root.withdraw()
 		# folder=filedialog.askdirectory()
@@ -151,12 +156,28 @@ def music_player(json_playlist_location : str):
 		# 			dpg.add_spacer(height=2,parent="list")
 
 	def search(sender, app_data, user_data):
-		songs = json.load(open("app_pc_papyV2/data/songs.json", "r"))[f"{json_playlist_location}"]
+		songs = json.load(open("data/songs.json", "r"))[f"{json_playlist_location}"]
 		dpg.delete_item("list", children_only=True)
 		for index, song in enumerate(songs):
 			if app_data in song.lower():
 				dpg.add_button(label=f"{ntpath.basename(song)}", callback=play,width=-1, height=25, user_data=song, parent="list")
 				dpg.add_spacer(height=2,parent="list")
+    
+	def next_song_if_previous_ended():
+		global state,no
+		while True:
+			if pygame.mixer.music.get_busy() == True:
+				state ="playing"
+				pass
+			elif pygame.mixer.music.get_busy() == False:
+				state = "paused"
+				next()
+			else:
+				break
+	# thread = threading.Thread(target=next_song_if_previous_ended,daemon=True)
+	# thread.start()
+
+
 
 
 	with dpg.theme(tag="base"):
@@ -205,8 +226,8 @@ def music_player(json_playlist_location : str):
 			dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (0,0,0,0))
 
 	with dpg.font_registry():
-		monobold = dpg.add_font("app_pc_papyV2/fonts/MonoLisa-Bold.ttf", 12)
-		head = dpg.add_font("app_pc_papyV2/fonts/MonoLisa-Bold.ttf", 15)
+		monobold = dpg.add_font("fonts/MonoLisa-Bold.ttf", 12)
+		head = dpg.add_font("fonts/MonoLisa-Bold.ttf", 15)
 
 	with dpg.window(tag="main",label="window title"):
 		with dpg.child_window(autosize_x=True,height=45,no_scrollbar=True):
@@ -274,4 +295,5 @@ def music_player(json_playlist_location : str):
 # music_player('songs/linkinpark')
 #music_player('songs')
 #music_player('songs/bob_marley')
-music_player('songs/one_republic')
+#music_player('songs/one_republic')
+music_player('songs/linkinpark')
